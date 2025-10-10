@@ -4,6 +4,7 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
+import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
 const UpcomingMoviesPage = (props) => {
 
@@ -26,9 +27,7 @@ const UpcomingMoviesPage = (props) => {
       <PageTemplate
         title="Upcoming Movies"
         movies={movies}
-        action={(movie) => {
-          return <PlaylistAddIcon movie={movie} />
-        }}
+        action={(movie) => <AddToPlaylistIcon movie={movie} />}
       />
   );
 };

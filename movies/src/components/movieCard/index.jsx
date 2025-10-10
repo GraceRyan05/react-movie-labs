@@ -17,9 +17,9 @@ import { Link } from "react-router";
 import Avatar from '@mui/material/Avatar';
 
 export default function MovieCard({ movie, action }) {
-    const { favorites, addToFavorites } = useContext(MoviesContext);
+    const { favorites, addToFavorites, mustWatch, addToMustWatch } = useContext(MoviesContext);
 
-  if (favorites.find((id) => id === movie.id)) {
+  if (favorites?.find((id) => id === movie.id)) {
     movie.favorite = true;
   } else {
     movie.favorite = false
@@ -28,6 +28,17 @@ export default function MovieCard({ movie, action }) {
   const handleAddToFavorite = (e) => {
     e.preventDefault();
     addToFavorites(movie);
+  };
+
+  if (mustWatch?.find((id) => id === movie.id)) {
+    movie.mustWatch = true;
+  } else {
+    movie.mustWatch = false
+  }
+
+  const handleAddToMustWatch = (e) => {
+    e.preventDefault();
+    addToMustWatch(movie);
   };
   return (
     <Card>
