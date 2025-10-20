@@ -9,6 +9,8 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import { Link } from "react-router";
+import Button from "@mui/material/Button";
 
 const root = {
     display: "flex",
@@ -24,7 +26,8 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
 const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <>
+    
+    <> 
       <Typography variant="h5" component="h3">
         Overview
       </Typography>
@@ -69,6 +72,17 @@ const [drawerOpen, setDrawerOpen] = useState(false);
             </li>
         ))}
       </Paper>
+
+      <Paper component="ul" sx={{...root}}>
+      <Link to={`/credits/${movie.id}`}>
+              <Button variant="outlined" size="medium" color="primary">
+                 Movie Credits ... 
+               </Button>
+        </Link>
+        </Paper>
+        
+
+      
 
      <Fab
         color="secondary"

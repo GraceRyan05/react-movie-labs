@@ -220,7 +220,6 @@ export const getPersonMovieCredits = (args) => {
  });
 };
 
-
 //Search feature
 export const searchMovies = (args) => {
   //console.log(args)
