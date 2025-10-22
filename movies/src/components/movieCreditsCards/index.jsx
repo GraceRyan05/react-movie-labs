@@ -9,6 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import { Link } from "react-router";
+import PersonDetails from "../personDetails";
 
 const ImageURL = "https://image.tmdb.org/t/p/w185_and_h278_bestv2";
 

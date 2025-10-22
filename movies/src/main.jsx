@@ -17,6 +17,11 @@ import TopRatedPage from "./pages/topRatedPage";
 import TrendingPage from "./pages/trendingMoviesPage";
 import NowPlayingPage from "./pages/nowPlayingPage";
 import MovieCreditsPage from "./pages/movieCreditsPage";
+import PersonDetailsPage from "./pages/personDetailsPage";
+
+//MUI Theme Provider - Global theme settings for the app
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,10 +33,29 @@ const queryClient = new QueryClient({
   },
 });
 
+//custom theme
+const theme = createTheme({
+  palette: {
+    mode: `light`, //or dark???
+    primary: {
+      main: '#8fbc8f', //tea green
+    },
+    secondary: {
+      main: '#013220', //dark green
+    },
+    background: {
+      default: '#ffffff', //white
+      paper: '#8fbc8f', //dark sea green
+    }
+  },
+});
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <MoviesContextProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline /> 
       <BrowserRouter>
         <SiteHeader />
           <Routes>
@@ -47,10 +71,12 @@ const App = () => {
           <Route path="/reviews/:id" element={<MovieReviewPage />} />
           <Route path="/reviews/form" element={<AddMovieReviewPage />} />
           <Route path="/credits/:id" element={<MovieCreditsPage />} />
+          <Route path="/person/:id" element={<PersonDetailsPage />} />
           <Route path="*" element={<Navigate to="/" />} />
             
           </Routes>
       </BrowserRouter>
+      </ThemeProvider>
       </MoviesContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
@@ -59,3 +85,7 @@ const App = () => {
 
 const rootElement = createRoot( document.getElementById("root") )
 rootElement.render(<App />);
+
+
+//HTML COLOUR CODES:
+//https://html-color.codes/green
