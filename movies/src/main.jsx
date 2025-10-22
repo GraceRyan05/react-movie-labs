@@ -38,14 +38,14 @@ const theme = createTheme({
   palette: {
     mode: `light`, //or dark???
     primary: {
-      main: '#8fbc8f', //tea green
+      main: '#21421e', //asparagus
     },
     secondary: {
       main: '#013220', //dark green
     },
     background: {
       default: '#ffffff', //white
-      paper: '#8fbc8f', //dark sea green
+      paper: '#87a96b', //asparagus
     }
   },
 });
