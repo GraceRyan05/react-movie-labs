@@ -11,6 +11,7 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 import { Link } from "react-router";
 import Button from "@mui/material/Button";
+import LanguageIcon from '@mui/icons-material/Language';
 
 const root = {
     display: "flex",
@@ -49,6 +50,8 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           </li>
         ))}
       </Paper>
+
+
       <Paper component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -60,7 +63,10 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           label={`${movie.vote_average} (${movie.vote_count})`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+        <Chip icon={<LanguageIcon />} label={`Original Language: ${movie.original_language}`} />
       </Paper>
+
+
 
       <Paper component="ul" sx={{...root}}>
         <li>
@@ -73,6 +79,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
         ))}
       </Paper>
 
+    
       <Paper component="ul" sx={{...root}}>
       <Link to={`/credits/${movie.id}`}>
               <Button variant="outlined" size="medium" color="primary">
