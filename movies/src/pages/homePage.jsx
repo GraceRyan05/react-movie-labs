@@ -6,12 +6,17 @@ import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
+//pagination
+import { Pagination, Stack, Box } from '@mui/material';
+
 
 const HomePage = (props) => {
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   const { data, error, isPending, isError  } = useQuery({
-    queryKey: ['discover'],
-    queryFn: getMovies,
+    queryKey: ['discover', currentPage],
+    queryFn: () => getMovies(currentPage),
+    keepPreviousData: true,
   })
   
   if (isPending) {
@@ -23,6 +28,12 @@ const HomePage = (props) => {
   }  
   
   const movies = data.results;
+  const totalPages = Math.min(data.total_pages, 500); // TMDB API only allows access to first 500 pages - avoid app crashing
+
+  const handlePageChange = (event, newPage) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Redundant, but necessary to avoid app crashing.
   const favorites = movies.filter(m => m.favorite)
@@ -30,14 +41,33 @@ const HomePage = (props) => {
   const addToFavorites = (movieId) => true 
 
     return (
+      <>
       <PageTemplate
         title="Discover Movies"
         movies={movies}
         action={(movie) => {
-          return <AddToFavoritesIcon movie={movie} />
-          return <AddToPlaylistIcon movie={movie} />
+          return (
+            <>
+          <AddToFavoritesIcon movie={movie} />
+          <AddToPlaylistIcon movie={movie} />
+          </>
+          )
         }}
       />
+      <Box display="flex" justifyContent="center" sx={{ marginTop: 4, marginBottom: 4 }}>
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages} 
+            page={currentPage} 
+            onChange={handlePageChange}
+            color="primary"
+            size="large"
+            showFirstButton
+            showLastButton
+          />
+        </Stack>
+      </Box>
+      </>
   );
 };
 export default HomePage;

@@ -25,7 +25,7 @@ const PopularPage = (props) => {
   }  
   
   const movies = data.results;
-  const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
+  const totalPages = Math.min(data.total_pages, 500); // TMDB API only allows access to first 500 pages - avoid app crashing
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
@@ -58,3 +58,8 @@ const PopularPage = (props) => {
 };
 export default PopularPage;
 
+
+//Pagination Sources:
+//https://mui.com/material-ui/react-pagination/
+//https://tanstack.com/query/latest/docs/framework/react/guides/paginated-queries
+//https://react.dev/reference/react/useState
