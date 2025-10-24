@@ -18,10 +18,12 @@ import TrendingPage from "./pages/trendingMoviesPage";
 import NowPlayingPage from "./pages/nowPlayingPage";
 import MovieCreditsPage from "./pages/movieCreditsPage";
 import PersonDetailsPage from "./pages/personDetailsPage";
+import PaginationItem from "@mui/material/PaginationItem";
 
 //MUI Theme Provider - Global theme settings for the app
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Pagination from "@mui/material/Pagination";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,9 +75,21 @@ const App = () => {
           <Route path="/credits/:id" element={<MovieCreditsPage />} />
           <Route path="/person/:id" element={<PersonDetailsPage />} />
           <Route path="*" element={<Navigate to="/" />} />
-            
+
           </Routes>
+          <Pagination count={10} color="primary" style={{display: 'flex', justifyContent: 'center', padding: '20px'}}>
+        <PaginationItem component={Link} to="/" />
+        <PaginationItem component={Link} to="/movies/favorites" />
+        <PaginationItem component={Link} to="/movies/upcoming" />
+        <PaginationItem component={Link} to="/movies/mustWatch" />
+        <PaginationItem component={Link} to="/movies/popularMovies" />
+        <PaginationItem component={Link} to="/movies/topRatedMovies" />
+        <PaginationItem component={Link} to="/movies/trendingMovies" />
+        <PaginationItem component={Link} to="/movies/nowPlaying" />
+      </Pagination>
       </BrowserRouter>
+      
+
       </ThemeProvider>
       </MoviesContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
