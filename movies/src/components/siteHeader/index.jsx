@@ -12,9 +12,12 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const SiteHeader = () => {
+const SiteHeader = ({ onToggleTheme, isDarkMode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -25,13 +28,13 @@ const SiteHeader = () => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Must Watch", path: "/movies/mustWatch" },
     { label: "Popular", path: "/movies/popularMovies" },
     { label: "Top Rated", path: "/movies/topRatedMovies" },
     { label: "Trending", path: "/movies/trendingMovies" },
     { label: "Now Playing", path: "/movies/nowPlaying"},
+    { label: "Favorites", path: "/movies/favorites" },
+    { label: "Must Watch", path: "/movies/mustWatch" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -48,10 +51,10 @@ const SiteHeader = () => {
       <AppBar position="fixed" color="secondary" >
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
-            TMDB Client
+            TMDB
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            All you ever wanted to know about Movies!
+            
           </Typography>
             {isMobile ? (
               <>
@@ -102,6 +105,9 @@ const SiteHeader = () => {
                 ))}
               </>
             )}
+            <IconButton color="inherit" onClick={onToggleTheme}>
+            {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Offset />

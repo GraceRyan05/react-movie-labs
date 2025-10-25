@@ -23,6 +23,7 @@ import PersonDetailsPage from "./pages/personDetailsPage";
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+import { useState, useMemo } from "react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -33,31 +34,42 @@ const queryClient = new QueryClient({
   },
 });
 
-//custom theme
-const theme = createTheme({
-  palette: {
-    mode: `light`, //or dark???
-    primary: {
-      main: '#21421e', //asparagus
-    },
-    secondary: {
-      main: '#013220', //dark green
-    },
-    background: {
-      default: '#ffffff', //white
-      paper: '#87a96b', //asparagus
-    }
-  },
-});
 
 const App = () => {
+   const [mode, setMode] = useState('light');
+
+  const toggleTheme = () => {
+    console.log("Toggling theme from:", mode);
+    setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+  };
+
+   const theme = useMemo(() => 
+    createTheme({
+      palette: {
+        mode: mode,
+        primary: {
+          main: mode === 'light' ? '#21421e' : '#87a96b', // Asparagus / Light Asparagus
+        },
+        secondary: {
+          main: mode === 'light' ? '#013220' : '#006a4e', // Dark Green / Muted Green
+        },
+        background: {
+          default: mode === 'light' ? '#ffffff' : '#121212', // White / Dark Gray
+          paper: mode === 'light' ? '#87a96b' : '#1e1e1e',   // Asparagus / Dark Gray
+        }
+      },
+    }),
+    [mode]
+  );
+
+  
   return (
     <QueryClientProvider client={queryClient}>
       <MoviesContextProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline /> 
       <BrowserRouter>
-        <SiteHeader />
+        <SiteHeader  onToggleTheme={toggleTheme} isDarkMode={mode === 'dark'}/>
           <Routes>
             <Route path="/" element={<HomePage />} />
           <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
@@ -89,3 +101,9 @@ rootElement.render(<App />);
 
 //HTML COLOUR CODES:
 //https://html-color.codes/green
+
+//Light / Dark Mode Colour:
+//https://mui.com/material-ui/customization/palette/#palette-mode
+//https://react.dev/reference/react/useMemo
+//https://mui.com/material-ui/customization/theming/#theme-provider
+//https://mui.com/material-ui/customization/dark-mode/
