@@ -12,6 +12,7 @@ import MovieReviews from "../movieReviews"
 import { Link } from "react-router";
 import Button from "@mui/material/Button";
 import LanguageIcon from '@mui/icons-material/Language';
+import SavingsIcon from '@mui/icons-material/Savings';
 
 const root = {
     display: "flex",
@@ -58,11 +59,18 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           icon={<MonetizationIcon />}
           label={`${movie.revenue.toLocaleString()}`}
         />
+      
         <Chip
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count})`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+        <Chip icon={<SavingsIcon />} label={`Budget: ${movie.budget.toLocaleString('en-US', {
+    maximumFractionDigits: 2,
+    notation: 'compact',
+    compactDisplay: 'short',
+  
+        })}`} />
         <Chip icon={<LanguageIcon />} label={`Original Language: ${movie.original_language}`} />
       </Paper>
 
@@ -111,3 +119,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
   );
 };
 export default MovieDetails ;
+
+
+//Help for cutting the millions figure budget to 25M rather than 25000000:
+//https://ahmadrosid.com/cheatsheet/js/formatting-number-javascript

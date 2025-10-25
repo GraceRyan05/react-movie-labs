@@ -3,6 +3,8 @@ import { getPopularMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
 
 import { Pagination, Stack, Box } from '@mui/material';
 
@@ -38,7 +40,14 @@ const PopularPage = (props) => {
       <PageTemplate
         title="Popular Movies"
         movies={movies}
-        action={(movie) => {}}
+        action={(movie) => {
+          return (
+            <>
+          <AddToFavoritesIcon movie={movie} />
+          <AddToPlaylistIcon movie={movie} />
+          </>
+          )
+        }}
       />
       <Box display="flex" justifyContent="center" sx={{ marginTop: 4, marginBottom: 4 }}>
         <Stack spacing={2}>

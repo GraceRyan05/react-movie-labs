@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
 
 //pagination
 import { Pagination, Stack, Box } from "@mui/material";
@@ -39,7 +40,14 @@ const UpcomingMoviesPage = (props) => {
       <PageTemplate
         title="Upcoming Movies"
         movies={movies}
-        action={(movie) => <AddToPlaylistIcon movie={movie} />}
+        action={(movie) => {
+          return (
+            <>
+          <AddToFavoritesIcon movie={movie} />
+          <AddToPlaylistIcon movie={movie} />
+          </>
+          )
+        }}
       />
       <Box display="flex" justifyContent="center" sx={{ marginTop: 4, marginBottom: 4 }}>
         <Stack spacing={2}>

@@ -21,6 +21,21 @@ const formControl =
     backgroundColor: "rgb(255, 255, 255)"
   };
 
+  const ratings = [
+    { id: "0", name: "All Ratings" },
+    { id: "1", name: "1 Star" },
+    { id: "2", name: "2 Stars" },
+    { id: "3", name: "3 Stars" },
+    { id: "4", name: "4 Stars" },
+    { id: "5", name: "5 Stars" },
+    { id: "6", name: "6 Stars" },
+    { id: "7", name: "7 Stars" },
+    { id: "8", name: "8 Stars" },
+    { id: "9", name: "9 Stars" },
+    { id: "10", name: "10 Stars" },
+  ];
+  
+
 export default function FilterMoviesCard(props) {
 
   const { data, error, isPending, isError } = useQuery({
@@ -51,6 +66,10 @@ export default function FilterMoviesCard(props) {
 
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
+  };
+
+  const handleRatingChange = (e) => {
+    handleChange(e, "rating", e.target.value);
   };
 
   return (
@@ -95,6 +114,26 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
+        {/* Rating Filter */}
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="rating-label">Rating</InputLabel>
+          <Select
+            labelId="rating-label"
+            id="rating-select"
+            value={props.ratingFilter}
+            onChange={handleRatingChange}
+          >
+            {ratings.map((rating) => {
+              return (
+                <MenuItem key={rating.id} value={rating.id}>
+                  {rating.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}

@@ -4,6 +4,9 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from '@tanstack/react-query';
 import { getMovie } from "../api/tmdb-api";
 import Spinner from '../components/spinner';
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist";
+
 
 //pagination
 import { Pagination, Stack, Box } from "@mui/material";
@@ -16,6 +19,7 @@ const NowPlayingPage = (props) => {
     queryFn: () => getNowPlaying(currentPage),
     keepPreviousData: true,
   })
+
   
   if (isPending) {
     return <Spinner />
@@ -39,7 +43,14 @@ const NowPlayingPage = (props) => {
       <PageTemplate
         title="Now Playing Movies"
         movies={movies}
-        action={(movie) => {}}
+        action={(movie) => {
+          return (
+            <>
+          <AddToFavoritesIcon movie={movie} />
+          <AddToPlaylistIcon movie={movie} />
+          </>
+          )
+        }}
       />
       <Box display="flex" justifyContent="center" sx={{ marginTop: 4, marginBottom: 4 }}>
         <Stack spacing={2}>
@@ -58,4 +69,3 @@ const NowPlayingPage = (props) => {
   );
 };
 export default NowPlayingPage;
-
