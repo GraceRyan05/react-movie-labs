@@ -12,7 +12,10 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+// Icons for theme toggle
+// Dark mode icon - Moon Icon
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+// Light mode icon - Sun Icon
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
@@ -21,6 +24,7 @@ const SiteHeader = ({ onToggleTheme, isDarkMode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  // Responsive design: check if the screen size is small (mobile)
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   
@@ -105,6 +109,7 @@ const SiteHeader = ({ onToggleTheme, isDarkMode }) => {
                 ))}
               </>
             )}
+            {/* Theme toggle button */}
             <IconButton color="inherit" onClick={onToggleTheme}>
             {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>

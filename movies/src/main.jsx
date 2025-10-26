@@ -36,17 +36,22 @@ const queryClient = new QueryClient({
 
 
 const App = () => {
+  //useState to manage light/dark mode, initially set to 'light'
    const [mode, setMode] = useState('light');
 
+   //function to toggle between light and dark mode
   const toggleTheme = () => {
     console.log("Toggling theme from:", mode);
+    //checks current mode and switches to the other
     setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
   };
 
+  //useMemo to create a theme object based on the current mode
    const theme = useMemo(() => 
     createTheme({
       palette: {
         mode: mode,
+        // Define custom colors for light and dark modes
         primary: {
           main: mode === 'light' ? '#21421e' : '#87a96b', // Asparagus / Light Asparagus
         },
@@ -66,7 +71,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <MoviesContextProvider>
+        {/* ThemeProvider to apply the theme across the app */}
         <ThemeProvider theme={theme}>
+          {/* CssBaseline to apply global CSS resets and base styles */}
           <CssBaseline /> 
       <BrowserRouter>
         <SiteHeader  onToggleTheme={toggleTheme} isDarkMode={mode === 'dark'}/>
